@@ -20,7 +20,7 @@
     year.textContent = String(new Date().getFullYear());
   }
 
-  var targets = document.querySelectorAll(".section, .hero-copy, .hero-portrait");
+  var targets = document.querySelectorAll(".section, .hero-copy, .hero-card");
   if (!("IntersectionObserver" in window)) {
     return;
   }

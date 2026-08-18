@@ -19,7 +19,6 @@
       property="og:description"
       content="Software developer building web applications and practical tools with TypeScript, React and Next.js."
     />
-    <meta property="og:image" content="https://avatars.githubusercontent.com/u/1790958?v=4" />
     <meta name="twitter:card" content="summary" />
 
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
@@ -44,7 +43,6 @@
         "@type": "Person",
         "name": "David Ly",
         "url": "https://www.davidly.ca/",
-        "image": "https://avatars.githubusercontent.com/u/1790958?v=4",
         "jobTitle": "Software Developer",
         "sameAs": ["https://github.com/djly"]
       }
@@ -109,16 +107,23 @@
           </div>
         </div>
 
-        <div class="hero-portrait">
-          <img
-            src="https://avatars.githubusercontent.com/u/1790958?v=4"
-            alt="Portrait of David Ly"
-            width="320"
-            height="320"
-            loading="eager"
-            decoding="async"
-          />
-        </div>
+        <aside class="hero-card card" aria-labelledby="focus-title">
+          <h2 class="hero-card-title" id="focus-title">What I focus on</h2>
+          <ul class="focus-list">
+            <li>
+              <span class="focus-label">Web applications</span>
+              <span class="focus-detail">Interfaces and APIs that stay quick under real data</span>
+            </li>
+            <li>
+              <span class="focus-label">Developer tooling</span>
+              <span class="focus-detail">Small utilities that remove repetitive manual work</span>
+            </li>
+            <li>
+              <span class="focus-label">Hardware side projects</span>
+              <span class="focus-detail">Sensors, data collection and readable dashboards</span>
+            </li>
+          </ul>
+        </aside>
       </section>
 
       <section class="section shell" id="about" aria-labelledby="about-title">
