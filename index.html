@@ -1,10 +1,269 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7339636156945634"
-     crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>David Ly — Software Developer</title>
+    <meta
+      name="description"
+      content="David Ly is a software developer building web applications and practical tools with TypeScript, React and Next.js."
+    />
+    <link rel="canonical" href="https://www.davidly.ca/" />
+    <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f8fc" media="(prefers-color-scheme: light)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.davidly.ca/" />
+    <meta property="og:title" content="David Ly — Software Developer" />
+    <meta
+      property="og:description"
+      content="Software developer building web applications and practical tools with TypeScript, React and Next.js."
+    />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme =
+            stored ||
+            (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+          document.documentElement.dataset.theme = theme;
+        } catch (e) {}
+      })();
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "David Ly",
+        "url": "https://www.davidly.ca/",
+        "jobTitle": "Software Developer",
+        "sameAs": ["https://github.com/djly"]
+      }
+    </script>
+
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7339636156945634"
+      crossorigin="anonymous"
+    ></script>
   </head>
+
   <body>
-    <a href="/imtool">Infinite Magicraid Tool</a>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="backdrop" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">DL</span>
+          <span class="brand-name">David&nbsp;Ly</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <button
+          class="theme-toggle"
+          type="button"
+          data-theme-toggle
+          aria-label="Switch colour theme"
+        >
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5" />
+            <path
+              d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"
+            />
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.5 8.5 0 1 0 10.2 10.2Z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Software Developer</p>
+          <h1 id="hero-title">Hi, I&rsquo;m David Ly.</h1>
+          <p class="lede">
+            I design and build web applications and the small, focused tools that make everyday
+            work easier &mdash; mostly with TypeScript, React and Next.js.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">View my work</a>
+            <a class="button" href="https://github.com/djly" rel="me noopener">GitHub</a>
+          </div>
+        </div>
+
+        <aside class="hero-card card" aria-labelledby="focus-title">
+          <h2 class="hero-card-title" id="focus-title">What I focus on</h2>
+          <ul class="focus-list">
+            <li>
+              <span class="focus-label">Web applications</span>
+              <span class="focus-detail">Interfaces and APIs that stay quick under real data</span>
+            </li>
+            <li>
+              <span class="focus-label">Developer tooling</span>
+              <span class="focus-detail">Small utilities that remove repetitive manual work</span>
+            </li>
+            <li>
+              <span class="focus-label">Hardware side projects</span>
+              <span class="focus-detail">Sensors, data collection and readable dashboards</span>
+            </li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section shell" id="about" aria-labelledby="about-title">
+        <div class="section-head">
+          <h2 id="about-title">About</h2>
+          <p class="section-sub">What I do and what I like to work with.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="prose">
+            <p>
+              I&rsquo;m a developer with a bias towards shipping. Most of my time goes into
+              full-stack web work: modelling the data, keeping the interface simple, and making
+              sure the thing still feels fast once real users get to it.
+            </p>
+            <p>
+              I enjoy the unglamorous parts too &mdash; cleaning up state management, tightening
+              build pipelines, and turning a spreadsheet somebody maintains by hand into a proper
+              tool. Away from the browser I tinker with sensors and small hardware projects.
+            </p>
+          </div>
+
+          <div class="stack card">
+            <h3>Tools I reach for</h3>
+            <ul class="chips">
+              <li>TypeScript</li>
+              <li>JavaScript</li>
+              <li>React</li>
+              <li>Next.js</li>
+              <li>Redux</li>
+              <li>Node.js</li>
+              <li>Tailwind CSS</li>
+              <li>HTML &amp; CSS</li>
+              <li>PHP / Laravel</li>
+              <li>Java</li>
+              <li>C#</li>
+              <li>Git</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="projects" aria-labelledby="projects-title">
+        <div class="section-head">
+          <h2 id="projects-title">Projects</h2>
+          <p class="section-sub">A few things I have built and published.</p>
+        </div>
+
+        <ul class="project-grid">
+          <li class="card project">
+            <div class="project-head">
+              <h3>Etheria: Restart Roster Tool</h3>
+              <span class="badge">Live</span>
+            </div>
+            <p>
+              A companion app for planning and tracking a character roster: searchable database,
+              per-character progress, local persistence and a light/dark interface.
+            </p>
+            <ul class="tags">
+              <li>Next.js</li>
+              <li>React</li>
+              <li>Redux Toolkit</li>
+              <li>Tailwind CSS</li>
+            </ul>
+            <div class="project-links">
+              <a class="link" href="/er-tool/">Open the tool</a>
+              <a class="link" href="https://github.com/djly/er-tool" rel="noopener">Source</a>
+            </div>
+          </li>
+
+          <li class="card project">
+            <div class="project-head">
+              <h3>Snoutt</h3>
+              <span class="badge badge-muted">In progress</span>
+            </div>
+            <p>
+              A digital sensor project exploring how to collect readings from cheap hardware and
+              turn them into something readable and useful.
+            </p>
+            <ul class="tags">
+              <li>Hardware</li>
+              <li>Sensors</li>
+              <li>Prototyping</li>
+            </ul>
+            <div class="project-links">
+              <a class="link" href="https://github.com/djly/Snoutt" rel="noopener">Source</a>
+            </div>
+          </li>
+
+          <li class="card project">
+            <div class="project-head">
+              <h3>Laravel Google Auth</h3>
+              <span class="badge badge-muted">Open source</span>
+            </div>
+            <p>
+              An authentication driver that lets a Laravel application sign users in with Google
+              OAuth instead of a local password table.
+            </p>
+            <ul class="tags">
+              <li>PHP</li>
+              <li>Laravel</li>
+              <li>OAuth</li>
+            </ul>
+            <div class="project-links">
+              <a class="link" href="https://github.com/djly/laravel-google-auth" rel="noopener"
+                >Source</a
+              >
+            </div>
+          </li>
+        </ul>
+
+        <p class="section-foot">
+          More experiments and forks live on
+          <a class="link" href="https://github.com/djly?tab=repositories" rel="noopener">GitHub</a>.
+        </p>
+      </section>
+
+      <section class="section shell" id="contact" aria-labelledby="contact-title">
+        <div class="card contact-card">
+          <div>
+            <h2 id="contact-title">Get in touch</h2>
+            <p class="section-sub">
+              Open to interesting work, collaborations and questions about anything above.
+            </p>
+          </div>
+          <div class="contact-actions">
+            <a class="button button-primary" href="mailto:hello@davidly.ca">hello@davidly.ca</a>
+            <a class="button" href="https://github.com/djly" rel="me noopener">github.com/djly</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p>&copy; <span data-year>2026</span> David Ly</p>
+        <p><a class="link" href="https://github.com/djly/djly.github.io" rel="noopener">Source of this site</a></p>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js" defer></script>
   </body>
 </html>
