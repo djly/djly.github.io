@@ -31,6 +31,8 @@ dependencies, so anything pushed to the default branch is what goes live.
 | `sitemap.xml`                 | Sitemap for search engines, with `lastmod` dates |
 | `CNAME`                       | Custom domain used by GitHub Pages             |
 | `.nojekyll`                   | Tells GitHub Pages to serve files as-is, skipping Jekyll |
+| `dating/`, `hinge/`, `bumble/` | Joke dating-profile page, at `/dating`, `/hinge`, `/bumble` |
+| `dating.css`, `dating.js`      | Styles/behaviour shared by the three dating page copies |
 
 The same header/nav markup (`<header class="mast">`) and footer
 (`<footer class="colophon">`) are duplicated at the top/bottom of each page —
@@ -70,6 +72,26 @@ locally with Pillow using the same palette and font fallbacks as `styles.css`
 (Avenir Next, Georgia); the script isn't checked in. Regenerate or replace it
 with a real photo whenever a better candidate exists — swap the file in
 place and every page picks it up automatically.
+
+**The dating page** (`/dating`, aliased at `/hinge` and `/bumble`): `dating/index.html`,
+`hinge/index.html`, and `bumble/index.html` are byte-identical copies (not a
+redirect, so there's no flash-of-redirect) — clean URLs come from GitHub
+Pages serving `<dir>/index.html` for a directory request. If you edit the
+page, copy the same change into all three files. They use root-absolute
+asset paths (`/dating.css`, `/dating.js`, `/favicon.svg`) since the pages
+live one level deep, unlike every other page's relative paths. All three
+are `noindex` and not linked from the main nav or sitemap — it's meant to be
+shared directly as a link, not discovered.
+
+The dislike (✕) button is intentionally never a real `<button>` — it's a
+`role`-less `<div aria-hidden="true">` with no tabindex, so keyboard and
+screen-reader users never encounter a control that can't actually be
+operated; they just get the one real, fully accessible `<button>` (like).
+For mouse/touch users, `dating.js` makes it flee the pointer on proximity,
+and even in the rare case a click lands, the handler only repositions it —
+it never registers an actual "dislike." Respects `prefers-reduced-motion`
+(no animated chase; the control just sits there inertly with an explanatory
+status message instead).
 
 ## Local preview
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>David — davidly.ca</title>
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="You get one option here." />
+    <link rel="canonical" href="https://www.davidly.ca/dating/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#ff5f7e" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="David Ly" />
+    <meta property="og:url" content="https://www.davidly.ca/dating/" />
+    <meta property="og:title" content="David — davidly.ca" />
+    <meta property="og:description" content="You get one option here." />
+    <meta property="og:image" content="https://www.davidly.ca/images/og-default.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="David — davidly.ca" />
+    <meta name="twitter:description" content="You get one option here." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,560;12..96,720&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/dating.css" />
+  </head>
+  <body>
+    <a class="dating-home" href="https://www.davidly.ca/">← davidly.ca</a>
+
+    <div class="swipe-card">
+      <div class="swipe-photo">
+        <span class="swipe-monogram" aria-hidden="true">DL</span>
+        <ul class="swipe-tags">
+          <li>🏍️ Motorcycles</li>
+          <li>🎮 Game dev</li>
+          <li>📷 Film photography</li>
+          <li>🏐 Volleyball</li>
+        </ul>
+      </div>
+      <div class="swipe-info">
+        <h1 class="swipe-name">David <span class="verified">✔ verified</span></h1>
+        <p class="swipe-location">Toronto, ON · Software Developer</p>
+        <ul class="swipe-prompts">
+          <li>
+            <span class="prompt-q">A useless skill I have</span>
+            Shipping side projects faster than I reply to texts.
+          </li>
+          <li>
+            <span class="prompt-q">You'll know I like you if</span>
+            I mention my motorcycle completely unprompted.
+          </li>
+          <li>
+            <span class="prompt-q">Simple pleasures</span>
+            Tri-X film, a clean volleyball serve, and a routine system that finally works.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="swipe-actions">
+      <div class="action-btn dislike-btn" id="dislike-btn" aria-hidden="true">✕</div>
+      <button type="button" class="action-btn like-btn" id="like-btn" aria-label="Like">♥</button>
+    </div>
+
+    <p class="dating-status" id="dating-status" aria-live="polite"></p>
+
+    <p class="dating-footer">
+      Also known as
+      <a href="https://www.davidly.ca/hinge/">davidly.ca/hinge</a> and
+      <a href="https://www.davidly.ca/bumble/">davidly.ca/bumble</a>.
+    </p>
+
+    <div class="match-overlay" id="match-overlay">
+      <div class="match-card" tabindex="-1">
+        <h2>It's a match! 🎉</h2>
+        <p>Turns out that was always the only option. Since we're both here—</p>
+        <div class="match-actions">
+          <a class="button" href="https://www.davidly.ca/">See the rest of the site</a>
+          <button type="button" class="link" id="match-close">Keep swiping</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/dating.js"></script>
+  </body>
+</html>
