@@ -26,7 +26,7 @@ dependencies, so anything pushed to the default branch is what goes live.
 | `contact.js`                  | Builds the footer email link at runtime (scraper mitigation) |
 | `nav.js`                      | Mobile nav toggle (collapses behind a Menu button below 640px) |
 | `favicon.svg`                 | Monogram favicon                               |
-| `images/`                     | Hero and gallery photos                        |
+| `images/`                     | Gallery photos and `og-default.png`            |
 | `robots.txt`                  | Crawler rules, points at the sitemap           |
 | `sitemap.xml`                 | Sitemap for search engines, with `lastmod` dates |
 | `CNAME`                       | Custom domain used by GitHub Pages             |
@@ -62,6 +62,14 @@ canonical URL, `og:url`, `og:title`, `og:description` (and `twitter:*`
 equivalents) to match. `og:type` is `website` for regular pages and `article`
 for `blog-*.html` posts. Only `index.html` carries the `application/ld+json`
 Person schema — don't duplicate it on other pages.
+
+**Social preview image**: `images/og-default.png` (1200×630) is a generated
+typographic card — not a photo — used site-wide as `og:image`/`twitter:image`
+so links unfurl with something branded instead of nothing. It was rendered
+locally with Pillow using the same palette and font fallbacks as `styles.css`
+(Avenir Next, Georgia); the script isn't checked in. Regenerate or replace it
+with a real photo whenever a better candidate exists — swap the file in
+place and every page picks it up automatically.
 
 ## Local preview
 
