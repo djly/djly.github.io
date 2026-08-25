@@ -8,24 +8,25 @@ dependencies, so anything pushed to the default branch is what goes live.
 
 ## Layout
 
-| Path                          | Purpose                                    |
-| ------------------------------ | ------------------------------------------- |
-| `index.html`                    | Home: About Me                              |
-| `career.html`                   | Career / CV                                 |
-| `projects.html`                 | Dev Projects                                |
-| `writing.html`                  | Writing index                               |
-| `writing-meet-gsplat.html`      | Case study: Meet-GSplat                     |
-| `writing-volleyball-tool.html`  | Case study: Volleyball Analytics Tool       |
-| `writing-carpel-funnel.html`    | Case study: Carpel Funnel                   |
-| `photography.html`              | Photography                                 |
-| `hobbies.html`                  | Hobbies                                     |
-| `now.html`                      | Now — current focus, update periodically    |
-| `styles.css`                    | Site stylesheet                             |
-| `gallery.js`                    | Lightbox behaviour for the photo galleries  |
-| `images/`                       | Hero and gallery photos                     |
-| `robots.txt`                    | Crawler rules, points at the sitemap        |
-| `sitemap.xml`                   | Sitemap for search engines                  |
-| `CNAME`                         | Custom domain used by GitHub Pages          |
+| Path                       | Purpose                                       |
+| --------------------------- | ---------------------------------------------- |
+| `index.html`                 | Home: About Me                                 |
+| `career.html`                | Career / CV                                    |
+| `projects.html`              | Dev Projects                                   |
+| `blog.html`                  | Dev Blog index                                 |
+| `blog-meet-gsplat.html`      | Case study: Meet-GSplat                        |
+| `blog-volleyball-tool.html`  | Case study: Volleyball Analytics Tool          |
+| `blog-carpel-funnel.html`    | Case study: Carpel Funnel                      |
+| `photography.html`           | Photography — documentary project + album link |
+| `hobbies.html`                | Hobbies                                        |
+| `now.html`                    | Now — current focus, update periodically       |
+| `styles.css`                  | Site stylesheet                                |
+| `gallery.js`                  | Lightbox behaviour for the photo galleries     |
+| `contact.js`                  | Builds the footer email link at runtime (scraper mitigation) |
+| `images/`                     | Hero and gallery photos                        |
+| `robots.txt`                  | Crawler rules, points at the sitemap           |
+| `sitemap.xml`                 | Sitemap for search engines                     |
+| `CNAME`                       | Custom domain used by GitHub Pages             |
 
 The same header/nav markup (`<header class="mast">`) and footer
 (`<footer class="colophon">`) are duplicated at the top/bottom of each page —
@@ -33,9 +34,22 @@ there's no templating, so when adding a page, copy an existing page's nav and
 update every other page's nav to link to it, and keep `aria-current="page"`
 pointing at the current page.
 
-New writing posts: add a `writing-*.html` file following the existing case
+New dev blog posts: add a `blog-*.html` file following the existing case
 studies' structure (`.page-header` + `.post-body`), add an entry to
-`writing.html`'s `.post-list`, and add it to `sitemap.xml`.
+`blog.html`'s `.post-list`, and add it to `sitemap.xml`.
+
+**Email address**: the footer's email link is intentionally not written as
+plain `mailto:` HTML — `contact.js` assembles it at runtime so simple scrapers
+that only read raw HTML never see the address. Don't revert this to a plain
+`<a href="mailto:...">` link.
+
+**Photography album**: `photography.html` links out to a public Google
+Photos album. The link's `href` is a placeholder (`#`) marked with a
+`GOOGLE_ALBUM_URL` comment — search for it and swap in the real album URL
+once it exists. The six numbered figures under "The set" are placeholder
+images (inline SVG data URIs) standing in for real photos; replace each
+figure's `src`, `alt`, and `<figcaption>` as photos are ready — no other
+markup needs to change.
 
 ## Local preview
 
