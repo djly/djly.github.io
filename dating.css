@@ -66,6 +66,7 @@ svg {
   aspect-ratio: 4 / 5;
   background: linear-gradient(155deg, #2c2140, #4a2f63 45%, #7b3a63);
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .swipe-photo-img {
@@ -76,10 +77,44 @@ svg {
   object-fit: cover;
   opacity: 0;
   transition: opacity 0.5s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .swipe-photo-img.is-active {
   opacity: 1;
+}
+
+.swipe-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(20, 10, 30, 0.45);
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.swipe-nav-prev {
+  left: 0.6rem;
+}
+
+.swipe-nav-next {
+  right: 0.6rem;
+}
+
+.swipe-nav:hover,
+.swipe-nav:focus-visible {
+  background: rgba(20, 10, 30, 0.75);
 }
 
 .swipe-photo::after {

@@ -9,12 +9,17 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Photo carousel — cross-fades through the profile photos, with dots that
-  // double as manual controls. Auto-advance is skipped under reduced motion,
-  // but the dots stay clickable either way.
+  // Photo carousel — cross-fades through the profile photos. Dots, the
+  // prev/next buttons, a left/right tap, and a left/right swipe all drive
+  // the same showPhoto/goTo pair, so every input method stays in sync.
+  // Auto-advance is skipped under reduced motion, but manual navigation
+  // still works either way.
   const photoImgs = document.querySelectorAll(".swipe-photo-img");
   const photoDots = document.querySelectorAll(".swipe-dot");
-  if (photoImgs.length > 1) {
+  const photoContainer = document.getElementById("swipe-photo");
+  const prevBtn = document.querySelector(".swipe-nav-prev");
+  const nextBtn = document.querySelector(".swipe-nav-next");
+  if (photoImgs.length > 1 && photoContainer) {
     let activeIndex = 0;
     let rotateTimer = null;
 
@@ -33,11 +38,48 @@
       rotateTimer = window.setInterval(() => showPhoto(activeIndex + 1), 3500);
     };
 
+    const goTo = (index) => {
+      showPhoto(index);
+      startRotation();
+    };
+
     photoDots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        showPhoto(i);
-        startRotation();
+      dot.addEventListener("click", (event) => {
+        event.stopPropagation();
+        goTo(i);
       });
+    });
+
+    if (prevBtn) prevBtn.addEventListener("click", (e) => { e.stopPropagation(); goTo(activeIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", (e) => { e.stopPropagation(); goTo(activeIndex + 1); });
+
+    // One pointer gesture covers mouse and touch: a horizontal drag past
+    // the threshold is a swipe (direction picks prev/next); anything
+    // smaller is a tap, and which half of the photo it landed on picks
+    // prev/next instead. Dots and the nav buttons opt out via closest().
+    const SWIPE_THRESHOLD = 40;
+    let pointerStartX = null;
+
+    photoContainer.addEventListener("pointerdown", (event) => {
+      if (event.target.closest(".swipe-dot, .swipe-nav")) return;
+      pointerStartX = event.clientX;
+    });
+
+    photoContainer.addEventListener("pointerup", (event) => {
+      if (pointerStartX === null || event.target.closest(".swipe-dot, .swipe-nav")) {
+        pointerStartX = null;
+        return;
+      }
+      const deltaX = event.clientX - pointerStartX;
+      pointerStartX = null;
+
+      if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+        goTo(activeIndex + (deltaX < 0 ? 1 : -1));
+      } else {
+        const rect = photoContainer.getBoundingClientRect();
+        const tappedRight = event.clientX - rect.left > rect.width / 2;
+        goTo(activeIndex + (tappedRight ? 1 : -1));
+      }
     });
 
     startRotation();

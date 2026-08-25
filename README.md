@@ -86,7 +86,12 @@ shared directly as a link, not discovered.
 **Profile photos** (`images/dating/`): nine real photos, cross-faded in a
 carousel (`.swipe-photo-img` + `.swipe-dot`), in the same order as the
 source Google Photos album — that order was intentional, so preserve it
-when adding or removing photos. Two include a child (family member) whose
+when adding or removing photos. Navigation is driven by whichever input
+the visitor uses — dots, the `.swipe-nav-prev`/`.swipe-nav-next` arrow
+buttons, a left/right tap on the photo, or a left/right swipe — all
+funneled through the same `goTo()` in `dating.js`, so anything that adds a
+new nav affordance should call `goTo()` too rather than touching
+`activeIndex` directly. Two include a child (family member) whose
 face is pixelated (mosaic, not a crop/blur-that-could-be-reversed) before
 the file ever left disk — do not swap in an unpixelated version of those
 two. `volleyball-rooftop.jpg` is pre-cropped to the exact 4:5 card ratio
