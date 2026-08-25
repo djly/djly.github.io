@@ -103,6 +103,18 @@ could render off-screen if anything delayed the positioning script). A
 small idle "jitter" animation runs on the resting button as a hint of
 life before contact, since touchscreens have no hover to react to.
 
+**The match modal**: hitting like opens a modal with a real, frictionless
+next step and an equally easy way out — this is a joke, not a dark pattern.
+"Email me →" is a `mailto:` link with the subject/body pre-filled (built at
+runtime by `dating.js`, same obfuscation approach as `contact.js`) so
+finishing the loop takes one click plus hitting send. "Copy my email
+instead" covers people without a configured mail client
+(`navigator.clipboard.writeText`, with a plain-text fallback if that's
+blocked). "Nah, I'm good — just here for the bit" closes with zero friction
+and zero guilt-tripping copy — clicking the backdrop or pressing Escape
+does the same. Don't add anything that makes declining harder or slower
+than accepting.
+
 ## Local preview
 
 ```bash

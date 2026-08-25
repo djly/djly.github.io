@@ -314,6 +314,11 @@ svg {
   text-decoration: underline;
 }
 
+.match-actions .link.is-confirmed {
+  color: var(--dpink);
+  text-decoration: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .dislike-btn {
     transition: none;

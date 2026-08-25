@@ -118,6 +118,38 @@
     if (!reduceMotion) resetToRestingSpot();
   }
 
+  // Not written as plain HTML for the same reason as the rest of the
+  // site's footer — contact.js assembles the address the same way.
+  const emailUser = "davidly16";
+  const emailHost = ["gmail", "com"].join(".");
+  const emailAddress = `${emailUser}@${emailHost}`;
+
+  const emailLink = document.getElementById("match-email");
+  const copyBtn = document.getElementById("match-copy");
+
+  if (emailLink) {
+    const subject = encodeURIComponent("It's a match (davidly.ca/dating)");
+    const body = encodeURIComponent("Hey David — your ✕ button is broken, so here I am.\n\n");
+    emailLink.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+  }
+
+  if (copyBtn) {
+    const defaultLabel = copyBtn.textContent;
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(emailAddress);
+        copyBtn.textContent = "Copied ✓";
+      } catch (err) {
+        copyBtn.textContent = emailAddress;
+      }
+      copyBtn.classList.add("is-confirmed");
+      window.setTimeout(() => {
+        copyBtn.textContent = defaultLabel;
+        copyBtn.classList.remove("is-confirmed");
+      }, 1800);
+    });
+  }
+
   likeBtn.addEventListener("click", openMatch);
 
   if (closeBtn) {
