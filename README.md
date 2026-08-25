@@ -20,13 +20,17 @@ dependencies, so anything pushed to the default branch is what goes live.
 | `photography.html`           | Photography — documentary project + album link |
 | `hobbies.html`                | Hobbies                                        |
 | `now.html`                    | Now — current focus, update periodically       |
+| `404.html`                    | Styled not-found page (noindex)                |
 | `styles.css`                  | Site stylesheet                                |
 | `gallery.js`                  | Lightbox behaviour for the photo galleries     |
 | `contact.js`                  | Builds the footer email link at runtime (scraper mitigation) |
+| `nav.js`                      | Mobile nav toggle (collapses behind a Menu button below 640px) |
+| `favicon.svg`                 | Monogram favicon                               |
 | `images/`                     | Hero and gallery photos                        |
 | `robots.txt`                  | Crawler rules, points at the sitemap           |
-| `sitemap.xml`                 | Sitemap for search engines                     |
+| `sitemap.xml`                 | Sitemap for search engines, with `lastmod` dates |
 | `CNAME`                       | Custom domain used by GitHub Pages             |
+| `.nojekyll`                   | Tells GitHub Pages to serve files as-is, skipping Jekyll |
 
 The same header/nav markup (`<header class="mast">`) and footer
 (`<footer class="colophon">`) are duplicated at the top/bottom of each page —
@@ -50,6 +54,14 @@ once it exists. The six numbered figures under "The set" are placeholder
 images (inline SVG data URIs) standing in for real photos; replace each
 figure's `src`, `alt`, and `<figcaption>` as photos are ready — no other
 markup needs to change.
+
+**Adding a page**: every page's `<head>` carries the same block — canonical
+link, favicon, `theme-color`, Open Graph and Twitter Card tags — right after
+the `styles.css` link. Copy that block from an existing page and update the
+canonical URL, `og:url`, `og:title`, `og:description` (and `twitter:*`
+equivalents) to match. `og:type` is `website` for regular pages and `article`
+for `blog-*.html` posts. Only `index.html` carries the `application/ld+json`
+Person schema — don't duplicate it on other pages.
 
 ## Local preview
 
