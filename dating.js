@@ -9,6 +9,40 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Photo carousel — cross-fades through the profile photos, with dots that
+  // double as manual controls. Auto-advance is skipped under reduced motion,
+  // but the dots stay clickable either way.
+  const photoImgs = document.querySelectorAll(".swipe-photo-img");
+  const photoDots = document.querySelectorAll(".swipe-dot");
+  if (photoImgs.length > 1) {
+    let activeIndex = 0;
+    let rotateTimer = null;
+
+    const showPhoto = (index) => {
+      activeIndex = (index + photoImgs.length) % photoImgs.length;
+      photoImgs.forEach((img, i) => img.classList.toggle("is-active", i === activeIndex));
+      photoDots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === activeIndex);
+        dot.setAttribute("aria-selected", String(i === activeIndex));
+      });
+    };
+
+    const startRotation = () => {
+      if (reduceMotion) return;
+      window.clearInterval(rotateTimer);
+      rotateTimer = window.setInterval(() => showPhoto(activeIndex + 1), 3500);
+    };
+
+    photoDots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        showPhoto(i);
+        startRotation();
+      });
+    });
+
+    startRotation();
+  }
+
   const taunts = [
     "Nice try.",
     "Not today.",

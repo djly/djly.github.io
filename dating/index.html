@@ -30,8 +30,27 @@
     <a class="dating-home" href="https://www.davidly.ca/">← davidly.ca</a>
 
     <div class="swipe-card">
-      <div class="swipe-photo">
-        <span class="swipe-monogram" aria-hidden="true">DL</span>
+      <div class="swipe-photo" id="swipe-photo">
+        <img class="swipe-photo-img is-active" src="/images/dating/dog-window.jpg" alt="David nuzzling his dog by a window." />
+        <img class="swipe-photo-img" src="/images/dating/motorcycle.jpg" alt="David riding a red motorcycle down a residential street." loading="lazy" />
+        <img class="swipe-photo-img" src="/images/dating/volleyball-rooftop.jpg" alt="David and five friends posing with a volleyball on a rooftop." loading="lazy" />
+        <img class="swipe-photo-img" src="/images/dating/wedding-carry.jpg" alt="David making a funny face while carrying a child over his shoulder at a wedding; the child's face is blurred." loading="lazy" />
+        <img class="swipe-photo-img" src="/images/dating/dog-lick.jpg" alt="David laughing while two dogs sit beside him, one licking his cheek." loading="lazy" />
+        <img class="swipe-photo-img" src="/images/dating/volleyball-gym.jpg" alt="David and five volleyball teammates posing together in a gym." loading="lazy" />
+        <img class="swipe-photo-img" src="/images/dating/hockey-jersey.jpg" alt="David smiling with a child in a Toronto Maple Leafs jersey; the child's face is blurred." loading="lazy" />
+        <img class="swipe-photo-img" src="/images/dating/volleyball-spike.jpg" alt="David jumping to spike a volleyball at the net." loading="lazy" />
+        <img class="swipe-photo-img" src="/images/dating/dog-door.jpg" alt="David smiling next to his dog in front of a red door." loading="lazy" />
+        <div class="swipe-dots" id="swipe-dots" role="tablist" aria-label="Profile photos">
+          <button type="button" class="swipe-dot is-active" data-index="0" role="tab" aria-selected="true" aria-label="Photo 1 of 9"></button>
+          <button type="button" class="swipe-dot" data-index="1" role="tab" aria-selected="false" aria-label="Photo 2 of 9"></button>
+          <button type="button" class="swipe-dot" data-index="2" role="tab" aria-selected="false" aria-label="Photo 3 of 9"></button>
+          <button type="button" class="swipe-dot" data-index="3" role="tab" aria-selected="false" aria-label="Photo 4 of 9"></button>
+          <button type="button" class="swipe-dot" data-index="4" role="tab" aria-selected="false" aria-label="Photo 5 of 9"></button>
+          <button type="button" class="swipe-dot" data-index="5" role="tab" aria-selected="false" aria-label="Photo 6 of 9"></button>
+          <button type="button" class="swipe-dot" data-index="6" role="tab" aria-selected="false" aria-label="Photo 7 of 9"></button>
+          <button type="button" class="swipe-dot" data-index="7" role="tab" aria-selected="false" aria-label="Photo 8 of 9"></button>
+          <button type="button" class="swipe-dot" data-index="8" role="tab" aria-selected="false" aria-label="Photo 9 of 9"></button>
+        </div>
         <ul class="swipe-tags">
           <li>🏍️ Motorcycles</li>
           <li>🎮 Game dev</li>
@@ -65,12 +84,6 @@
     </div>
 
     <p class="dating-status" id="dating-status" aria-live="polite"></p>
-
-    <p class="dating-footer">
-      Also known as
-      <a href="https://www.davidly.ca/hinge/">davidly.ca/hinge</a> and
-      <a href="https://www.davidly.ca/bumble/">davidly.ca/bumble</a>.
-    </p>
 
     <div class="match-overlay" id="match-overlay">
       <div class="match-card" tabindex="-1">

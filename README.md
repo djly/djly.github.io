@@ -83,6 +83,18 @@ live one level deep, unlike every other page's relative paths. All three
 are `noindex` and not linked from the main nav or sitemap — it's meant to be
 shared directly as a link, not discovered.
 
+**Profile photos** (`images/dating/`): nine real photos, cross-faded in a
+carousel (`.swipe-photo-img` + `.swipe-dot`), in the same order as the
+source Google Photos album — that order was intentional, so preserve it
+when adding or removing photos. Two include a child (family member) whose
+face is pixelated (mosaic, not a crop/blur-that-could-be-reversed) before
+the file ever left disk — do not swap in an unpixelated version of those
+two. `volleyball-rooftop.jpg` is pre-cropped to the exact 4:5 card ratio
+centered on the group, rather than relying on CSS `object-fit: cover` to
+crop it — do the same (crop to 4:5 in an image editor before adding) for
+any future group/landscape photo, since default center-crop doesn't
+reliably frame a group shot well.
+
 The dislike (✕) button is intentionally never a real `<button>` — it's a
 `role`-less `<div aria-hidden="true">` with no tabindex, so keyboard and
 screen-reader users never encounter a control that can't actually be
