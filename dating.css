@@ -21,7 +21,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4.5rem 1.25rem 3rem;
+  padding: 4.5rem 1.25rem 9rem;
   font-family: "Source Serif 4", Georgia, serif;
   background: radial-gradient(120% 100% at 50% 0%, #ff8a9e 0%, var(--dpink) 45%, var(--dpurple) 100%);
   color: var(--dink);
@@ -228,10 +228,13 @@ svg {
 }
 
 .swipe-actions {
-  position: relative;
+  position: fixed;
+  left: 50%;
+  bottom: 1.2rem;
+  transform: translateX(-50%);
   width: min(92vw, 24rem);
-  margin-top: 1.6rem;
   height: 4.4rem;
+  z-index: 40;
 }
 
 .action-btn {
@@ -299,13 +302,27 @@ svg {
 }
 
 .dating-status {
-  min-height: 1.4rem;
-  margin-top: 1rem;
+  position: fixed;
+  left: 50%;
+  bottom: 6.2rem;
+  transform: translateX(-50%);
+  z-index: 40;
+  max-width: min(88vw, 22rem);
+  margin: 0;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: rgba(20, 10, 30, 0.6);
+  pointer-events: none;
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 0.85rem;
   color: #fff;
   text-align: center;
   opacity: 0.95;
+}
+
+.dating-status:empty {
+  background: none;
+  padding: 0;
 }
 
 .match-overlay {

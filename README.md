@@ -100,6 +100,19 @@ crop it — do the same (crop to 4:5 in an image editor before adding) for
 any future group/landscape photo, since default center-crop doesn't
 reliably frame a group shot well.
 
+**Like/dislike buttons float, fixed to the viewport bottom** (`.swipe-actions`),
+rather than sitting in normal document flow — the bio prompts got long enough
+to push them below the fold otherwise, and the point of the page is that the
+like button is always reachable. `.dating-status` (the taunt text) floats
+with them, just above, with its own dark pill background since it needs to
+stay legible over whatever's scrolled underneath — image, white card, or
+gradient — not just the page background it was designed for originally; it
+collapses to nothing (`:empty` rule) before the first dodge. `body`'s
+bottom padding (9rem) exists specifically so the last prompt can scroll clear
+of the floating bar — if you add anything to the floating bar or make it
+taller, increase that padding to match, or the last prompt will end up
+hidden behind it again.
+
 The dislike (✕) button is intentionally never a real `<button>` — it's a
 `role`-less `<div aria-hidden="true">` with no tabindex, so keyboard and
 screen-reader users never encounter a control that can't actually be
