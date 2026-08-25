@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dev Projects — David Ly</title>
+    <meta
+      name="description"
+      content="Side projects from David Ly: a Gaussian-splat scanning booth for car meets, a volleyball video analytics tool, and a pixel-art idle game."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,560;12..96,720&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="mast">
+      <a class="mast-brand" href="index.html">David Ly</a>
+      <nav class="mast-nav" aria-label="Primary">
+        <a href="career.html">Career</a>
+        <a href="projects.html" aria-current="page">Dev Projects</a>
+        <a href="photography.html">Photography</a>
+        <a href="hobbies.html">Hobbies</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <header class="page-header">
+        <p class="eyebrow">Dev Projects</p>
+        <h1>Dev Projects</h1>
+        <p class="lede-body">
+          A few things I'm building outside of work — some shipping, some
+          still just a spec.
+        </p>
+      </header>
+
+      <section class="section">
+        <h2>Selected projects</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-head">
+              <h3>Meet-GSplat</h3>
+              <p class="project-status">In development · v0.5</p>
+            </div>
+            <p class="project-tagline">Photoreal 3D scans for car meets.</p>
+            <p>
+              A booth-ready pipeline for turning phone photos of a car into a
+              shareable 3D scan. Capture at the meet, process on an RTX 4090
+              at home, and hand the owner a branded, shareable 3D viewer —
+              payment collected at the booth, delivery straight to their
+              garage.
+            </p>
+            <ul class="project-tags">
+              <li>Node.js</li>
+              <li>Gaussian Splatting</li>
+              <li>Spark.js Viewer</li>
+              <li>GPU Pipeline</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-head">
+              <h3>Volleyball Analytics Tool</h3>
+              <p class="project-status">Active</p>
+            </div>
+            <p class="project-tagline">Turns match tape into structured data.</p>
+            <p>
+              Processes volleyball match video through computer vision —
+              homography, player and ball tracking — then game-logic and
+              rally segmentation, storing the results in a Neo4j graph with a
+              GraphQL API and a frontend for annotation-driven review.
+            </p>
+            <ul class="project-tags">
+              <li>Python</li>
+              <li>Computer Vision</li>
+              <li>Neo4j</li>
+              <li>GraphQL</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-head">
+              <h3>Carpel Funnel</h3>
+              <p class="project-status">Prototype · MVP spec</p>
+            </div>
+            <p class="project-tagline">An idle ARPG about programming your own adventurer.</p>
+            <p>
+              A pixel-art idle game built around an Equip &amp; Build →
+              Program Routine → Deploy → Loot loop: gear up a hero, script
+              their priorities, send them off to clear maps unattended, and
+              come back for the loot.
+            </p>
+            <ul class="project-tags">
+              <li>Game Design</li>
+              <li>Pixel Art</li>
+              <li>Idle / Automation</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p>David Ly</p>
+      <p>Toronto, Ontario</p>
+    </footer>
+  </body>
+</html>

@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>David Ly — Off the Clock</title>
+    <title>David Ly</title>
     <meta
       name="description"
-      content="David Ly. Software by day; steel-frame bikes, timber joinery, and Tri-X film after hours."
+      content="David Ly. Software developer in Toronto — career, dev projects, photography, and hobbies."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,132 +17,70 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a class="skip" href="#hobbies">Skip to hobbies</a>
+    <a class="skip" href="#about">Skip to About</a>
 
     <header class="mast">
-      <a class="mast-brand" href="#top">David Ly</a>
+      <a class="mast-brand" href="index.html">David Ly</a>
       <nav class="mast-nav" aria-label="Primary">
-        <a href="#hobbies">Off the Clock</a>
+        <a href="career.html">Career</a>
+        <a href="projects.html">Dev Projects</a>
+        <a href="photography.html">Photography</a>
+        <a href="hobbies.html">Hobbies</a>
       </nav>
     </header>
 
     <main id="top">
-      <section class="hero" aria-label="Introduction">
-        <img
-          class="hero-image"
-          src="images/hero-workshop.jpg"
-          alt="Workshop at dusk: a steel road bike on the wall, a walnut slab on sawhorses, hand tools on a pegboard, and a twin-lens camera on a shelf."
-        />
-        <div class="hero-copy">
-          <h1 class="brand">David Ly</h1>
-          <p class="lede">Building software. Making things slowly.</p>
-          <a class="cta" href="#hobbies">Off the Clock</a>
-        </div>
+      <section class="intro">
+        <h1 class="brand">David Ly</h1>
+        <p class="lede">Software developer in Toronto. Building things at work, slower things after.</p>
       </section>
 
-      <section class="hobbies" id="hobbies" aria-labelledby="hobbies-heading">
+      <section class="hobbies" id="about" aria-labelledby="about-heading">
         <header class="hobbies-intro">
-          <p class="eyebrow">Off the Clock</p>
-          <h2 id="hobbies-heading">The Work I Do with My Hands</h2>
+          <p class="eyebrow">About</p>
+          <h2 id="about-heading">Software by day, slower things after hours</h2>
           <p class="body">
-            When I step away from the screen, I look for things with weight,
-            texture, and no undo command. For the past six years, that has meant
-            wrenching on 1980s steel-frame road bikes, learning Japanese
-            hand-cut timber joinery, and shooting Tri-X film on a 1974 twin-lens
-            reflex camera. These projects force a different cadence. You cannot
-            rush a five-step French polish, and you cannot edit an exposure once
-            the shutter drops. Whether I am aligning a derailleur by ear or
-            waiting out grain patterns in a walnut slab, making things slowly
-            keeps my instincts sharp.
+            I'm a software developer based in Toronto, currently building at
+            Reflexions. Before that I led technical teams through blockchain
+            and fintech builds at Capital Blockchain, shipped design-firm
+            platforms and cloud deployments at Minefield Consulting, and spent
+            a few years as a research assistant at Ryerson's Ubiquitous and
+            Pervasive Computing Lab, building apps for privacy and
+            augmentative communication. I studied Computer Engineering at
+            Waterloo and Computer Science at Ryerson.
           </p>
-          <p class="subline">A few corners of my daily life, offline.</p>
+          <p class="body">
+            Outside of that, I coached competitive gymnastics for four years,
+            and these days I split my off hours between motorcycles, video
+            games, volleyball, and shooting film.
+          </p>
+          <p class="subline">Have a look around.</p>
         </header>
 
-        <div class="gallery" role="list">
-          <figure class="shot shot-wheel" role="listitem">
-            <button
-              type="button"
-              class="shot-open"
-              data-gallery-index="0"
-              aria-label="Open photo: bicycle wheel on a truing stand"
-            >
-              <img
-                src="images/gallery-wheel.jpg"
-                alt="Steel bicycle wheel mounted on a blue truing stand with hand wrenches on a wooden workbench."
-                width="1600"
-                height="1200"
-              />
-            </button>
-            <figcaption>
-              Truing a 36-spoke Mavic rim in the basement workshop on a cold
-              November evening.
-            </figcaption>
-          </figure>
-
-          <figure class="shot shot-joinery" role="listitem">
-            <button
-              type="button"
-              class="shot-open"
-              data-gallery-index="1"
-              aria-label="Open photo: cutting oak joinery with a Japanese saw"
-            >
-              <img
-                src="images/gallery-joinery.jpg"
-                alt="Close-up of hands using a fine-toothed hand saw to cut angled notches into a pale oak plank."
-                width="1600"
-                height="1200"
-              />
-            </button>
-            <figcaption>
-              Cutting mortise and tenon joints for a white oak coffee table
-              using an 8-inch Japanese pull saw.
-            </figcaption>
-          </figure>
-
-          <figure class="shot shot-camera" role="listitem">
-            <button
-              type="button"
-              class="shot-open"
-              data-gallery-index="2"
-              aria-label="Open photo: vintage twin-lens camera at the dunes"
-            >
-              <img
-                src="images/gallery-camera.jpg"
-                alt="Vintage black box camera with two stacked lenses resting open on a weathered picnic table."
-                width="1600"
-                height="1200"
-              />
-            </button>
-            <figcaption>
-              Loading 120 roll film into a Yashica TLR before sunrise at the
-              coastal dunes.
-            </figcaption>
-          </figure>
+        <div class="link-grid">
+          <a class="link-card" href="career.html">
+            <p class="eyebrow">Career</p>
+            <h3>Where I've worked</h3>
+          </a>
+          <a class="link-card" href="projects.html">
+            <p class="eyebrow">Dev Projects</p>
+            <h3>What I'm building</h3>
+          </a>
+          <a class="link-card" href="photography.html">
+            <p class="eyebrow">Photography</p>
+            <h3>Shooting film</h3>
+          </a>
+          <a class="link-card" href="hobbies.html">
+            <p class="eyebrow">Hobbies</p>
+            <h3>Motorcycles, games &amp; volleyball</h3>
+          </a>
         </div>
       </section>
     </main>
 
     <footer class="colophon">
       <p>David Ly</p>
-      <p>Steel, oak, and silver halide.</p>
+      <p>Toronto, Ontario</p>
     </footer>
-
-    <dialog class="lightbox" aria-label="Photo viewer">
-      <div class="lightbox-frame">
-        <img alt="" />
-        <p class="lightbox-caption"></p>
-      </div>
-      <button type="button" class="lightbox-close" aria-label="Close photo">
-        Close
-      </button>
-      <button type="button" class="lightbox-prev" aria-label="Previous photo">
-        Previous
-      </button>
-      <button type="button" class="lightbox-next" aria-label="Next photo">
-        Next
-      </button>
-    </dialog>
-
-    <script src="gallery.js"></script>
   </body>
 </html>

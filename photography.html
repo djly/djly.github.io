@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photography — David Ly</title>
+    <meta
+      name="description"
+      content="David Ly shooting Tri-X film on a 1974 Yashica twin-lens reflex camera."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,560;12..96,720&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="mast">
+      <a class="mast-brand" href="index.html">David Ly</a>
+      <nav class="mast-nav" aria-label="Primary">
+        <a href="career.html">Career</a>
+        <a href="projects.html">Dev Projects</a>
+        <a href="photography.html" aria-current="page">Photography</a>
+        <a href="hobbies.html">Hobbies</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <header class="page-header">
+        <p class="eyebrow">Photography</p>
+        <h1>Photography</h1>
+        <p class="lede-body">
+          Shooting Tri-X on a 1974 Yashica twin-lens reflex — slow,
+          deliberate, and no undo button once the shutter drops.
+        </p>
+      </header>
+
+      <section class="section">
+        <div class="gallery gallery--single" role="list">
+          <figure class="shot shot-camera" role="listitem">
+            <button
+              type="button"
+              class="shot-open"
+              data-gallery-index="0"
+              aria-label="Open photo: vintage twin-lens camera at the dunes"
+            >
+              <img
+                src="images/gallery-camera.jpg"
+                alt="Vintage black box camera with two stacked lenses resting open on a weathered picnic table."
+                width="1600"
+                height="1200"
+              />
+            </button>
+            <figcaption>
+              Loading 120 roll film into a Yashica TLR before sunrise at the
+              coastal dunes.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p>David Ly</p>
+      <p>Toronto, Ontario</p>
+    </footer>
+
+    <dialog class="lightbox" aria-label="Photo viewer">
+      <div class="lightbox-frame">
+        <img alt="" />
+        <p class="lightbox-caption"></p>
+      </div>
+      <button type="button" class="lightbox-close" aria-label="Close photo">
+        Close
+      </button>
+      <button type="button" class="lightbox-prev" aria-label="Previous photo">
+        Previous
+      </button>
+      <button type="button" class="lightbox-next" aria-label="Next photo">
+        Next
+      </button>
+    </dialog>
+
+    <script src="gallery.js"></script>
+  </body>
+</html>
