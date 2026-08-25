@@ -21,7 +21,8 @@
 
     <header class="mast">
       <a class="mast-brand" href="index.html">David Ly</a>
-      <nav class="mast-nav" aria-label="Primary">
+      <button class="mast-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+      <nav class="mast-nav" id="primary-nav" aria-label="Primary">
         <a href="career.html">Career</a>
         <a href="projects.html">Dev Projects</a>
         <a href="blog.html">Dev Blog</a>
@@ -40,7 +41,7 @@
       <section class="hobbies" id="about" aria-labelledby="about-heading">
         <header class="hobbies-intro">
           <p class="eyebrow">About</p>
-          <h2 id="about-heading">Software by day, slower things after hours</h2>
+          <h2 id="about-heading">Software by day. Slower things by night.</h2>
           <p class="body">
             I'm a software developer based in Toronto, currently building at
             Reflexions. Before that I led technical teams through blockchain
@@ -89,6 +90,7 @@
         <li><a href="https://www.linkedin.com/in/lydavid/">LinkedIn</a></li>
       </ul>
     </footer>
+    <script src="nav.js"></script>
     <script src="contact.js"></script>
   </body>
 </html>

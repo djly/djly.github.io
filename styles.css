@@ -102,9 +102,41 @@ a {
   text-decoration-color: var(--enamel);
 }
 
+.mast-toggle {
+  display: none;
+  font-family: var(--display);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .mast-toggle {
+    display: inline-block;
+  }
+
+  .mast-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    order: 3;
+    margin-top: 0.6rem;
+    gap: 0.9rem;
+  }
+
+  .mast-nav.is-open {
+    display: flex;
+  }
+}
+
 .intro {
   padding: 4.5rem 6vw 1rem;
-  max-width: 44rem;
+  max-width: 56rem;
   animation: rise 0.9s var(--ease) both;
 }
 
@@ -134,8 +166,13 @@ a {
 }
 
 .hobbies-intro {
-  max-width: 40rem;
+  max-width: 50rem;
   margin-bottom: 4.5rem;
+}
+
+.hobbies-intro .body,
+.hobbies-intro .subline {
+  max-width: 38rem;
 }
 
 .eyebrow {
@@ -168,7 +205,7 @@ a {
 
 .page-header {
   padding: 3.6rem 6vw 1rem;
-  max-width: 46rem;
+  max-width: 56rem;
 }
 
 .page-header h1 {
@@ -371,6 +408,26 @@ a {
   color: var(--steel);
   border: 1px solid color-mix(in srgb, var(--steel) 45%, transparent);
   padding: 0.24rem 0.55rem;
+}
+
+.now-list {
+  margin: 0 0 1.4rem;
+  padding: 0;
+  list-style: none;
+  max-width: 42rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.now-list li {
+  padding-top: 0.9rem;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.now-list li:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
 .project-link {
