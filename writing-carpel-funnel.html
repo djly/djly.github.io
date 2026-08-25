@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The routine is the character — David Ly</title>
+    <meta
+      name="description"
+      content="Designing Carpel Funnel, an idle RPG where the player writes the routine their character runs, and the simulation architecture that keeps it honest."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,560;12..96,720&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="mast">
+      <a class="mast-brand" href="index.html">David Ly</a>
+      <nav class="mast-nav" aria-label="Primary">
+        <a href="career.html">Career</a>
+        <a href="projects.html">Dev Projects</a>
+        <a href="writing.html" aria-current="page">Writing</a>
+        <a href="photography.html">Photography</a>
+        <a href="hobbies.html">Hobbies</a>
+        <a href="now.html">Now</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <header class="page-header">
+        <p class="eyebrow">Carpel Funnel · August 2026</p>
+        <h1>The routine is the character</h1>
+        <p class="lede-body">
+          An idle RPG where you never touch combat directly — you program
+          the priorities your character fights by, and a bad routine has to
+          genuinely lose to a good one on identical gear.
+        </p>
+      </header>
+
+      <section class="section">
+        <div class="post-body">
+          <p>
+            Carpel Funnel (working title internally: Idle Exile) is a
+            Path of Exile–inspired mobile idle RPG. The loop is Equip &amp;
+            Build → Program Routine → Deploy → Loot: gear up a character,
+            write the priority list it fights by — "if HP under 30%, use a
+            flask; if a boss is detected, cast this" — send it off to clear
+            content unattended, and come back for the loot. It's still at
+            the design-doc and MVP-spec stage; the interesting work right
+            now is proving the core loop is fun before committing to
+            simulation code.
+          </p>
+
+          <h2>The constraint that decides everything else</h2>
+          <p>
+            The premise only works if the routine actually matters. If
+            combat resolves as a stat-lookup — good gear wins regardless of
+            what the routine says — the "programming" part of the game is
+            theater. So the server has to genuinely execute player-authored
+            logic, tick by tick, and a well-written routine has to clear
+            meaningfully faster than a starter one on identical gear — by
+            design, as much as a 5x spread in clear speed for the same
+            character.
+          </p>
+          <p>
+            That's expensive if taken literally: tick-based simulation for
+            every character, all the time, doesn't scale. The resolution is
+            a hybrid model — cheap statistical approximation for bulk
+            offline farming, and full deterministic tick-based simulation
+            (100ms ticks) only when it matters: pinnacle bosses, a player
+            actively spectating, or anything where an approximation would
+            feel unfair. The tick-based runs periodically feed back into the
+            approximation's parameters, so the cheap model stays accurate
+            without ever being asked to carry the content that actually
+            needs fidelity. Server cost ends up bounded by how many players
+            are online watching, not by how many characters exist — and
+            because better routines clear faster, they're also cheaper to
+            simulate than bad ones.
+          </p>
+
+          <h2>The Codex: progression that isn't a bigger number</h2>
+          <p>
+            The part of the design I'm happiest with has no equivalent in
+            Path of Exile. The routine editor's own vocabulary — conditions
+            like "surrounded" or "boss detected," actions like "kite" or
+            "cast," logic operators like <code>IF/ELSE</code> — isn't
+            available from the start. It's discovered, tiered, and slotted
+            from a personal library called the Codex. A player who hasn't
+            found the "surrounded" condition literally cannot write a
+            routine that reacts to being surrounded, regardless of how good
+            their gear is.
+          </p>
+          <p>
+            That solves two problems I actually care about. First, idle
+            games struggle to answer "what do I do between gear upgrades" —
+            the Codex gives a second progression axis that's about
+            precision, not bigger numbers: a tier-3 HP-check doesn't heal
+            more, it just lets you set a 1% threshold instead of a fixed
+            30/50/70. Second, it kills routine copy-paste as a way to skip
+            the game: a top player can publish their boss-killing routine,
+            a newcomer can import it, and it'll show half its rows greyed
+            out until they've earned the same vocabulary. The routine is a
+            blueprint; the Codex is the toolbox, and you can't borrow
+            someone else's.
+          </p>
+
+          <h2>Server-authoritative, on purpose</h2>
+          <p>
+            Simulation workers are stateless and horizontally scalable,
+            pulling jobs from a queue; Postgres is the source of truth, with
+            routines stored as JSONB specifically so the routine grammar can
+            keep evolving without a schema migration every time a new node
+            type ships. Redis is a queue and cache, not a system of record.
+            Replay logs — the actual combat event stream a player can watch
+            back — live in object storage with a TTL, because nobody needs
+            an infinite archive of maps they cleared six months ago. And the
+            client is deliberately treated as a view layer: it renders
+            results, it never generates them, which closes off most of the
+            obvious cheating surface before it opens.
+          </p>
+
+          <blockquote>
+            Two players with identical gear should be able to perform
+            differently — and the difference should be earned, not bought.
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p>David Ly</p>
+      <p>Toronto, Ontario</p>
+      <ul class="colophon-links">
+        <li><a href="mailto:davidly16@gmail.com">Email</a></li>
+        <li><a href="https://github.com/djly">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/lydavid/">LinkedIn</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>

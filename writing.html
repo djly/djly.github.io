@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Writing — David Ly</title>
+    <meta
+      name="description"
+      content="Notes on building Meet-GSplat, the Volleyball Analytics Tool, and Carpel Funnel."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,560;12..96,720&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="mast">
+      <a class="mast-brand" href="index.html">David Ly</a>
+      <nav class="mast-nav" aria-label="Primary">
+        <a href="career.html">Career</a>
+        <a href="projects.html">Dev Projects</a>
+        <a href="writing.html" aria-current="page">Writing</a>
+        <a href="photography.html">Photography</a>
+        <a href="hobbies.html">Hobbies</a>
+        <a href="now.html">Now</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <header class="page-header">
+        <p class="eyebrow">Writing</p>
+        <h1>Writing</h1>
+        <p class="lede-body">
+          Notes on the decisions behind the projects on the
+          <a href="projects.html">Dev Projects</a> page — the tradeoffs, not
+          just the feature list.
+        </p>
+      </header>
+
+      <section class="section">
+        <div class="post-list">
+          <article class="post-entry">
+            <h2><a href="writing-meet-gsplat.html">Picking the boring trainer for a car-meet 3D scanning booth</a></h2>
+            <p class="post-meta">Meet-GSplat · August 2026</p>
+            <p class="excerpt">
+              Why a commercial GUI trainer beat the open-source Gaussian
+              splatting pipeline for a booth that has to run under time
+              pressure — and the licenses that would have quietly wrecked
+              the business model.
+            </p>
+          </article>
+
+          <article class="post-entry">
+            <h2><a href="writing-volleyball-tool.html">One data model, four representations</a></h2>
+            <p class="post-meta">Volleyball Analytics Tool · August 2026</p>
+            <p class="excerpt">
+              Vision, game logic, a Postgres API, and a Neo4j/GraphQL layer
+              all need to agree on what a "rally" is. Keeping that
+              consistent — including how IDs alone differ across layers —
+              turned out to be the real fullstack problem.
+            </p>
+          </article>
+
+          <article class="post-entry">
+            <h2><a href="writing-carpel-funnel.html">The routine is the character</a></h2>
+            <p class="post-meta">Carpel Funnel · August 2026</p>
+            <p class="excerpt">
+              Designing an idle RPG where the player never touches combat —
+              they write the routine the character runs — and the
+              simulation architecture that keeps that honest without
+              melting a server.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p>David Ly</p>
+      <p>Toronto, Ontario</p>
+      <ul class="colophon-links">
+        <li><a href="mailto:davidly16@gmail.com">Email</a></li>
+        <li><a href="https://github.com/djly">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/lydavid/">LinkedIn</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>

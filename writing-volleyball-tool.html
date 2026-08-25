@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>One data model, four representations — David Ly</title>
+    <meta
+      name="description"
+      content="Keeping a volleyball analytics pipeline's data model consistent across vision, a Postgres API, and a Neo4j/GraphQL layer."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,560;12..96,720&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="mast">
+      <a class="mast-brand" href="index.html">David Ly</a>
+      <nav class="mast-nav" aria-label="Primary">
+        <a href="career.html">Career</a>
+        <a href="projects.html">Dev Projects</a>
+        <a href="writing.html" aria-current="page">Writing</a>
+        <a href="photography.html">Photography</a>
+        <a href="hobbies.html">Hobbies</a>
+        <a href="now.html">Now</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <header class="page-header">
+        <p class="eyebrow">Volleyball Analytics Tool · August 2026</p>
+        <h1>One data model, four representations</h1>
+        <p class="lede-body">
+          The hard part of this tool was never the framework choice. It was
+          getting vision, game logic, a relational API, and a graph database
+          to agree on what a "rally" is.
+        </p>
+      </header>
+
+      <section class="section">
+        <div class="post-body">
+          <p>
+            The tool takes raw volleyball match video and turns it into
+            structured data: computer vision handles homography and
+            player/ball tracking, game logic classifies actions — serve,
+            pass, set, spike, block, dig — and segments the footage into
+            rallies, and the results land in a Neo4j graph exposed over
+            GraphQL, with an optional Postgres-backed REST API and a
+            frontend for annotation-driven review. This started because I
+            play volleyball and wanted to actually see the patterns in a
+            match, not because I set out to build a data-modeling exercise.
+            It turned into one anyway.
+          </p>
+
+          <h2>Four layers, one meaning</h2>
+          <p>
+            A <strong>Match</strong> has many <strong>Rallies</strong>; each
+            Rally has a server, an optional scorer, a list of participating
+            players, and an ordered list of <strong>Events</strong> — one per
+            touch. That's a small model. The problem is that it has to exist
+            identically in four places that don't naturally agree on
+            anything:
+          </p>
+          <ul>
+            <li>
+              the vision/game-logic pipeline, where a player is just a
+              tracking ID string with no persistent identity;
+            </li>
+            <li>
+              the REST API, backed by Postgres, where everything is an
+              auto-incrementing integer primary key;
+            </li>
+            <li>
+              Neo4j, which can go either way on IDs and needs an explicit
+              link back to the vision layer's track IDs; and
+            </li>
+            <li>
+              GraphQL, which exposes all of the above as opaque string
+              <code>ID</code>s regardless of what's underneath.
+            </li>
+          </ul>
+          <p>
+            Left alone, each layer will happily invent its own shape for
+            "rally," and then the frontend spends its life translating
+            between four dialects that drift further apart every time
+            someone adds a field to one of them.
+          </p>
+
+          <h2>Writing the model down before writing more code</h2>
+          <p>
+            The fix wasn't a framework — it was a canonical data-model
+            document that every layer has to align to, with rules that are
+            specific enough to catch bugs on their own: a rally's
+            <code>server_id</code> must be a member of its
+            <code>players_involved</code>; a <code>scorer_id</code>, when
+            set, must be too; player lists can't contain duplicates; and
+            when the vision pipeline can't confidently infer who scored, the
+            field is null rather than guessed. That last rule matters more
+            than it looks — a system that's honest about uncertainty is more
+            useful downstream than one that always produces a confident,
+            occasionally wrong answer.
+          </p>
+          <p>
+            Rally scoring itself is inferred, not detected directly: the
+            game-logic layer looks at the last touch on the side that won
+            the exchange — a kill, or the opposing side's error — and credits
+            that player, falling back to null when the inference isn't
+            reliable enough to commit to.
+          </p>
+
+          <h2>Product thinking, not just pipeline thinking</h2>
+          <p>
+            The monetization plan shaped the architecture as much as the
+            data model did. Pricing is usage-based — matches processed, plus
+            video minutes priced by resolution, since a 4K match costs
+            noticeably more vision compute than 720p and the pricing should
+            reflect that rather than charging everyone the same flat rate.
+            Video ingestion defaults to the user's own cloud storage — Drive,
+            S3, Dropbox — rather than assuming the platform should host
+            every video by default; hosting is an explicit paid add-on for
+            people who want it, not the default cost center.
+          </p>
+
+          <blockquote>
+            The framework is the easy 80%. Getting four systems to agree on
+            what a "rally" means is the fullstack problem.
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p>David Ly</p>
+      <p>Toronto, Ontario</p>
+      <ul class="colophon-links">
+        <li><a href="mailto:davidly16@gmail.com">Email</a></li>
+        <li><a href="https://github.com/djly">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/lydavid/">LinkedIn</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>

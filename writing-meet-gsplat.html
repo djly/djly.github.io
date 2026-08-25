@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Picking the boring trainer for a car-meet 3D scanning booth — David Ly</title>
+    <meta
+      name="description"
+      content="Why Meet-GSplat uses a commercial GUI trainer instead of the open-source Gaussian splatting pipeline, and the licenses that would have wrecked the business model."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,560;12..96,720&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="mast">
+      <a class="mast-brand" href="index.html">David Ly</a>
+      <nav class="mast-nav" aria-label="Primary">
+        <a href="career.html">Career</a>
+        <a href="projects.html">Dev Projects</a>
+        <a href="writing.html" aria-current="page">Writing</a>
+        <a href="photography.html">Photography</a>
+        <a href="hobbies.html">Hobbies</a>
+        <a href="now.html">Now</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <header class="page-header">
+        <p class="eyebrow">Meet-GSplat · August 2026</p>
+        <h1>Picking the boring trainer for a car-meet 3D scanning booth</h1>
+        <p class="lede-body">
+          The instinct is to reach for the research pipeline. At a car meet,
+          that instinct is wrong.
+        </p>
+      </header>
+
+      <section class="section">
+        <div class="post-body">
+          <p>
+            Meet-GSplat turns a phone's worth of photos of a car into a
+            shareable 3D scan. The booth version of the workflow is: capture
+            at the meet, train on a home RTX 4090, clean the result, and
+            hand the owner a QR code that opens a branded 3D viewer. Free
+            scans expire and carry a watermark; paid ones don't, and can be
+            embedded elsewhere. That's the product. The interesting part was
+            everything upstream of "which trainer do I use."
+          </p>
+
+          <h2>The bottleneck isn't the GPU</h2>
+          <p>
+            Gaussian splatting has an obvious "proper" answer: an owned
+            pipeline built on <code>gsplat</code> and Nerfstudio's Splatfacto,
+            trained from COLMAP reconstructions, Apache-licensed and fully
+            automatable. That's the pipeline I'd reach for by default, and
+            it's still on the roadmap as a parallel track for batch
+            automation later.
+          </p>
+          <p>
+            It's the wrong first choice for a booth. At a meet, the
+            constraint isn't training throughput — it's an operator standing
+            next to a car, capture quality that has to be judged in seconds,
+            and a line of people waiting. A CLI research pipeline with
+            fragile setup steps turns every one of those seconds into risk.
+            So the primary trainer is PostShot, a commercial GUI tool with a
+            live preview, specifically because it minimizes booth complexity,
+            not because it's more "engineered." The fewer moving parts
+            between a bad photo set and a visible warning, the fewer ruined
+            scans.
+          </p>
+
+          <h2>Licenses that would have quietly wrecked the model</h2>
+          <p>
+            The other thing a research pipeline doesn't warn you about is
+            licensing, and this is where it gets genuinely dangerous for a
+            paid product. The original INRIA Gaussian splatting trainer —
+            the one most tutorials point to — is non-commercial only. Ship
+            that under a paid tier and the business model has a landmine in
+            it from day one. OpenSplat, an open alternative, is AGPL, which
+            drags copyleft obligations into a closed product if you're not
+            careful. PostShot itself has a free tier that's non-commercial
+            and limited on export — fine for testing, not for a meet where
+            money changes hands.
+          </p>
+          <p>
+            None of this shows up in a feature comparison. It only shows up
+            if you read license text before you build on top of something,
+            which is a boring habit that's saved me from a much worse
+            conversation later.
+          </p>
+
+          <h2>Baking the business model into the server</h2>
+          <p>
+            The free/paid split isn't a marketing page bolted on afterward —
+            it's enforced server-side, per model: a 72-hour TTL and
+            watermark on free scans, no embed route, an 80 MB cap; no TTL,
+            no watermark, an embeddable viewer, and a 200 MB cap on hosted
+            ones. An operator can upgrade a free scan to hosted with one
+            action and no re-upload, because the annoying failure mode is a
+            customer who already has a link and now has to start over.
+          </p>
+
+          <h2>Operating alone, under pressure, on a home GPU</h2>
+          <p>
+            The whole thing runs on a home RTX 4090, tunneled out under a
+            named domain so QR codes resolve for someone on cellular data,
+            not <code>localhost</code>. A health endpoint reports worker
+            heartbeat, queue depth, disk space, and GPU state — the stuff you
+            actually want to check between customers. And there's a
+            deliberate "meet mode" switch that lets the operator (usually me)
+            pause the upload queue mid-event if something's going wrong,
+            rather than discovering a backlog after the fact. Payment
+            collection is still manual — Venmo at the booth — which is the
+            correct amount of engineering for a system that's proving out a
+            workflow, not the amount of engineering that looks impressive in
+            a portfolio.
+          </p>
+
+          <blockquote>
+            The best tool for a one-person booth under time pressure is
+            whichever one fails the least visibly.
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p>David Ly</p>
+      <p>Toronto, Ontario</p>
+      <ul class="colophon-links">
+        <li><a href="mailto:davidly16@gmail.com">Email</a></li>
+        <li><a href="https://github.com/djly">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/lydavid/">LinkedIn</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>

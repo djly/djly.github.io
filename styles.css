@@ -373,6 +373,107 @@ a {
   padding: 0.24rem 0.55rem;
 }
 
+.project-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--display);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+  text-decoration-thickness: 1px;
+}
+
+.project-link:hover,
+.project-link:focus-visible {
+  color: var(--enamel);
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  max-width: 54rem;
+}
+
+.post-entry {
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+}
+
+.post-entry h2 {
+  margin: 0 0 0.3rem;
+  font-family: var(--display);
+  font-weight: 720;
+  font-size: 1.4rem;
+}
+
+.post-entry h2 a {
+  text-decoration: none;
+}
+
+.post-entry h2 a:hover,
+.post-entry h2 a:focus-visible {
+  color: var(--enamel);
+}
+
+.post-meta {
+  margin: 0 0 0.6rem;
+  font-family: var(--display);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.post-entry .excerpt {
+  margin: 0;
+  color: var(--steel);
+}
+
+.post-body {
+  max-width: 42rem;
+}
+
+.post-body h2 {
+  margin: 2.2rem 0 1rem;
+  font-family: var(--display);
+  font-weight: 720;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.post-body h2:first-child {
+  margin-top: 0;
+}
+
+.post-body p {
+  margin: 0 0 1.2rem;
+}
+
+.post-body ul,
+.post-body ol {
+  margin: 0 0 1.2rem;
+  padding-left: 1.3rem;
+}
+
+.post-body li {
+  margin: 0.35rem 0;
+}
+
+.post-body strong {
+  color: var(--ink);
+}
+
+.post-body blockquote {
+  margin: 1.8rem 0;
+  padding-left: 1.2rem;
+  border-left: 3px solid var(--enamel);
+  color: var(--steel);
+  font-style: italic;
+}
+
 .hobby-list {
   display: flex;
   flex-direction: column;
@@ -442,8 +543,10 @@ figcaption {
 
 .colophon {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: baseline;
+  gap: 0.6rem 1.4rem;
   padding: 1.6rem 6vw 2.2rem;
   font-family: var(--display);
   font-size: 0.78rem;
@@ -455,6 +558,26 @@ figcaption {
 
 .colophon p {
   margin: 0;
+}
+
+.colophon-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.colophon-links a {
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+  text-decoration-thickness: 1px;
+}
+
+.colophon-links a:hover,
+.colophon-links a:focus-visible {
+  color: var(--enamel);
 }
 
 .lightbox {
