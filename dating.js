@@ -28,29 +28,39 @@
     statusEl.textContent = text;
   }
 
-  function place(left, top) {
-    dislikeBtn.style.left = `${left}px`;
-    dislikeBtn.style.top = `${top}px`;
-  }
-
-  function placeInitial() {
-    const likeRect = likeBtn.getBoundingClientRect();
-    const w = dislikeBtn.offsetWidth || 67;
-    place(Math.max(12, likeRect.left - w - 16), likeRect.top);
+  // Undoes the promotion to viewport-fixed positioning, returning the
+  // button to its plain CSS resting spot next to the like button. Used on
+  // resize/orientation change and whenever the match overlay closes, so
+  // there's never a state where it's stranded off-screen.
+  function resetToRestingSpot() {
+    dislikeBtn.classList.remove("is-fleeing");
+    dislikeBtn.style.left = "";
+    dislikeBtn.style.top = "";
+    dodgeCount = 0;
   }
 
   function dodge() {
     if (matched || dodging) return;
     dodging = true;
 
+    // First escape: capture wherever it's actually sitting right now (its
+    // ordinary CSS position) before switching to position:fixed, so the
+    // switch itself never causes a jump — only the dodge after it moves.
+    if (!dislikeBtn.classList.contains("is-fleeing")) {
+      const startRect = dislikeBtn.getBoundingClientRect();
+      dislikeBtn.style.left = `${startRect.left}px`;
+      dislikeBtn.style.top = `${startRect.top}px`;
+      dislikeBtn.classList.add("is-fleeing");
+      void dislikeBtn.offsetWidth; // force layout before the next style change
+    }
+
     const w = dislikeBtn.offsetWidth || 67;
     const h = dislikeBtn.offsetHeight || 67;
     const margin = 16;
     const maxLeft = Math.max(margin, window.innerWidth - w - margin);
     const maxTop = Math.max(72, window.innerHeight - h - margin);
-    const left = margin + Math.random() * (maxLeft - margin);
-    const top = 72 + Math.random() * (maxTop - 72);
-    place(left, top);
+    dislikeBtn.style.left = `${margin + Math.random() * (maxLeft - margin)}px`;
+    dislikeBtn.style.top = `${72 + Math.random() * (maxTop - 72)}px`;
 
     dodgeCount += 1;
     setStatus(taunts[Math.min(dodgeCount - 1, taunts.length - 1)]);
@@ -60,36 +70,17 @@
     }, 240);
   }
 
-  // Web fonts swapping in (or images loading) can reflow the layout after
-  // the initial placement runs, stranding the button at a stale position.
-  // Re-settle until the first real dodge happens; after that, a random
-  // position is the point, so leave it alone.
-  function resettleIfUndodged() {
-    if (!matched && dodgeCount === 0) placeInitial();
-  }
-
   if (reduceMotion) {
     // Respect reduced motion: no animated chase, just a static dead control.
-    dislikeBtn.style.transition = "none";
-    placeInitial();
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(resettleIfUndodged);
-    }
-    window.addEventListener("load", resettleIfUndodged);
     dislikeBtn.addEventListener("click", () => {
       setStatus("That one doesn't do anything. The heart does.");
     });
   } else {
-    placeInitial();
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(resettleIfUndodged);
-    }
-    window.addEventListener("load", resettleIfUndodged);
     window.addEventListener("resize", () => {
-      if (!matched) placeInitial();
+      if (!matched) resetToRestingSpot();
     });
     window.addEventListener("orientationchange", () => {
-      if (!matched) window.setTimeout(placeInitial, 50);
+      if (!matched) window.setTimeout(resetToRestingSpot, 50);
     });
 
     document.addEventListener("pointermove", (event) => {
@@ -101,6 +92,9 @@
       if (distance < 90) dodge();
     });
 
+    // pointerdown covers touch too: on a phone there's no hover to react to
+    // before contact, so the earliest possible signal is the touch itself —
+    // this still moves it before the matching pointerup/click can land.
     dislikeBtn.addEventListener("pointerdown", (event) => {
       event.preventDefault();
       dodge();
@@ -121,7 +115,7 @@
   function closeMatch() {
     matched = false;
     overlay.classList.remove("is-open");
-    if (!reduceMotion) placeInitial();
+    if (!reduceMotion) resetToRestingSpot();
   }
 
   likeBtn.addEventListener("click", openMatch);

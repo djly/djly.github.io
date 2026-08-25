@@ -192,11 +192,37 @@ svg {
 }
 
 .dislike-btn {
-  position: fixed;
+  left: calc(50% - 0.5rem - 4.2rem);
   background: #fff;
   color: var(--dmuted);
   z-index: 30;
   transition: left 0.22s cubic-bezier(0.2, 1, 0.3, 1), top 0.22s cubic-bezier(0.2, 1, 0.3, 1);
+  animation: dislike-jitter 2.6s ease-in-out infinite;
+}
+
+/* Promoted to viewport-relative positioning only once it starts fleeing —
+   until then it sits in its ordinary spot via plain CSS, with no
+   dependency on JS having run yet. */
+.dislike-btn.is-fleeing {
+  position: fixed;
+  animation: none;
+}
+
+/* A small idle twitch, mostly for touch devices: there's no hover to react
+   to before contact, so this is the only hint (on any device) that the
+   control is uncooperative before you actually touch it. */
+@keyframes dislike-jitter {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  22% { transform: translate(-3px, 2px) rotate(-4deg); }
+  46% { transform: translate(2px, -3px) rotate(3deg); }
+  68% { transform: translate(-2px, -2px) rotate(-3deg); }
+  84% { transform: translate(3px, 1px) rotate(4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dislike-btn {
+    animation: none;
+  }
 }
 
 .dating-status {

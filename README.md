@@ -93,6 +93,16 @@ it never registers an actual "dislike." Respects `prefers-reduced-motion`
 (no animated chase; the control just sits there inertly with an explanatory
 status message instead).
 
+Its resting position is plain CSS (right next to the like button, no JS
+required), and it stays that way — `position: static` inside `.swipe-actions`
+— until the first dodge, when JS captures its current on-screen rect,
+promotes it to `position: fixed` at that exact spot (so the promotion itself
+never causes a jump), and only then starts moving it. Don't make the resting
+position depend on JS running first — that was the original bug (button
+could render off-screen if anything delayed the positioning script). A
+small idle "jitter" animation runs on the resting button as a hint of
+life before contact, since touchscreens have no hover to react to.
+
 ## Local preview
 
 ```bash
