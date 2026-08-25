@@ -228,10 +228,14 @@ svg {
 }
 
 .swipe-actions {
+  /* Centered via margin-left, not transform: a transform on this element
+     would create a new containing block for any position:fixed
+     descendant (like .dislike-btn), silently making its "fixed"
+     positioning relative to this box instead of the real viewport. */
   position: fixed;
   left: 50%;
   bottom: 1.2rem;
-  transform: translateX(-50%);
+  margin-left: calc(min(92vw, 24rem) * -0.5);
   width: min(92vw, 24rem);
   height: 4.4rem;
   z-index: 40;
@@ -268,7 +272,18 @@ svg {
 }
 
 .dislike-btn {
-  left: calc(50% - 0.5rem - 4.2rem);
+  /* Always fixed to the viewport, never relative to .swipe-actions (which
+     is itself fixed to the viewport bottom) — mixing the two reference
+     frames is what caused it to jump on the first dodge, since its
+     resting position and its fleeing position were computed against
+     different containing blocks. left/bottom below replicate where it
+     would sit inside .swipe-actions (centered, just left of the like
+     button), but expressed directly in viewport terms so there's exactly
+     one coordinate system throughout. */
+  position: fixed;
+  top: auto;
+  left: calc(50vw - 0.5rem - 4.2rem);
+  bottom: 1.4rem;
   background: #fff;
   color: var(--dmuted);
   z-index: 30;
@@ -276,11 +291,7 @@ svg {
   animation: dislike-jitter 2.6s ease-in-out infinite;
 }
 
-/* Promoted to viewport-relative positioning only once it starts fleeing —
-   until then it sits in its ordinary spot via plain CSS, with no
-   dependency on JS having run yet. */
 .dislike-btn.is-fleeing {
-  position: fixed;
   animation: none;
 }
 

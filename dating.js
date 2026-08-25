@@ -104,10 +104,11 @@
     statusEl.textContent = text;
   }
 
-  // Undoes the promotion to viewport-fixed positioning, returning the
-  // button to its plain CSS resting spot next to the like button. Used on
-  // resize/orientation change and whenever the match overlay closes, so
-  // there's never a state where it's stranded off-screen.
+  // Clears any inline position from a previous dodge, returning the
+  // button to its plain CSS resting spot next to the like button — both
+  // are fixed to the viewport, so this is just removing the override, not
+  // switching coordinate systems. Used on resize/orientation change and
+  // whenever the match overlay closes, so it's never stranded off-screen.
   function resetToRestingSpot() {
     dislikeBtn.classList.remove("is-fleeing");
     dislikeBtn.style.left = "";
@@ -118,17 +119,10 @@
   function dodge() {
     if (matched || dodging) return;
     dodging = true;
-
-    // First escape: capture wherever it's actually sitting right now (its
-    // ordinary CSS position) before switching to position:fixed, so the
-    // switch itself never causes a jump — only the dodge after it moves.
-    if (!dislikeBtn.classList.contains("is-fleeing")) {
-      const startRect = dislikeBtn.getBoundingClientRect();
-      dislikeBtn.style.left = `${startRect.left}px`;
-      dislikeBtn.style.top = `${startRect.top}px`;
-      dislikeBtn.classList.add("is-fleeing");
-      void dislikeBtn.offsetWidth; // force layout before the next style change
-    }
+    // Only stops the idle jitter animation now — position was already
+    // fixed-to-viewport before this ever ran, so there's nothing to
+    // promote or reconcile here.
+    dislikeBtn.classList.add("is-fleeing");
 
     const w = dislikeBtn.offsetWidth || 67;
     const h = dislikeBtn.offsetHeight || 67;

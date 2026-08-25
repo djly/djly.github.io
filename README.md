@@ -123,14 +123,28 @@ it never registers an actual "dislike." Respects `prefers-reduced-motion`
 (no animated chase; the control just sits there inertly with an explanatory
 status message instead).
 
-Its resting position is plain CSS (right next to the like button, no JS
-required), and it stays that way — `position: static` inside `.swipe-actions`
-— until the first dodge, when JS captures its current on-screen rect,
-promotes it to `position: fixed` at that exact spot (so the promotion itself
-never causes a jump), and only then starts moving it. Don't make the resting
-position depend on JS running first — that was the original bug (button
-could render off-screen if anything delayed the positioning script). A
-small idle "jitter" animation runs on the resting button as a hint of
+It's `position: fixed` at all times — resting and fleeing alike — computed
+directly against the viewport (`left: calc(50vw - 0.5rem - 4.2rem)`,
+`bottom: 1.4rem`), rather than toggling between `absolute`-inside-`.swipe-actions`
+and `fixed` on the first dodge. That toggle used to be the design (simpler
+CSS, JS promoted it on first contact), but it broke once `.swipe-actions`
+itself became `position: fixed` for the floating action bar (see below):
+resting and fleeing were then two different coordinate systems, and the
+first dodge visibly jumped between them.
+
+**If you touch this again**: a `transform` on `.swipe-actions` (or any
+ancestor of `.dislike-btn`) creates a new containing block for
+`position: fixed` descendants per the CSS spec — that's what broke it a
+second time even after switching to `position: fixed` throughout, since
+`.swipe-actions` was centered via `transform: translateX(-50%)`. It's
+centered via `margin-left: calc(min(92vw, 24rem) * -0.5)` instead now,
+specifically to avoid that. Don't reintroduce a transform on `.swipe-actions`
+(or wrap `.dislike-btn` in any other transformed ancestor) without accounting
+for this — `getComputedStyle(el).left` and `el.getBoundingClientRect().left`
+should always agree for `.dislike-btn`; if they diverge, something upstream
+has (re)introduced a containing block.
+
+A small idle "jitter" animation runs on the resting button as a hint of
 life before contact, since touchscreens have no hover to react to.
 
 **The match modal**: hitting like opens a modal with a real, frictionless
