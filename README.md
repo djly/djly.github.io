@@ -149,9 +149,16 @@ life before contact, since touchscreens have no hover to react to.
 
 **The match modal**: hitting like opens a modal with a real, frictionless
 next step and an equally easy way out — this is a joke, not a dark pattern.
-"Email me →" is a `mailto:` link with the subject/body pre-filled (built at
-runtime by `dating.js`, same obfuscation approach as `contact.js`) so
-finishing the loop takes one click plus hitting send. "Copy my email
+Three icon buttons (`.social-btn`) offer Email, Instagram, and Messenger:
+Email (id `match-email`) gets a `mailto:` href with the subject/body
+pre-filled, built at runtime by `dating.js` (same obfuscation approach as
+`contact.js`); Instagram and Messenger are plain `ig.me/m/41600` and
+`m.me/therealdavidly` deep links — real usernames, not placeholders, so
+don't touch them without asking. The icons themselves are generic
+hand-drawn SVGs (envelope, camera-outline, chat-bubble), not the actual
+Instagram/Messenger logomarks — deliberate, to avoid any trademark
+reproduction question; each is paired with a visible text label so the
+generic icon is never the only way to tell them apart. "Copy my email
 instead" covers people without a configured mail client
 (`navigator.clipboard.writeText`, with a plain-text fallback if that's
 blocked). "Nah, I'm good — just here for the bit" closes with zero friction
